@@ -1,0 +1,27 @@
+
+
+Job ran in background to scrape the web and parse the html for fixtures and results.
+
+Display  controller for all fixtures
+
+
+
+
+
+
+
+
+
+
+Scrapper Controller :
+	pick websites to scrap, maybe a list predefined to turn on or off or ability to add new websites
+
+Schedule Controller :
+	display list of games from the data base
+
+Login Controller :
+	Login with facebook
+
+profile page :
+	specified sports or teams and there games and results
+
