@@ -1,17 +1,11 @@
 
+First draft:
+
+A controller that scrapes bbc and displays fixture for premier league in a table.
 
 Job ran in background to scrape the web and parse the html for fixtures and results.
 
 Display  controller for all fixtures
-
-
-
-
-
-
-
-
-
 
 Scrapper Controller :
 	pick websites to scrap, maybe a list predefined to turn on or off or ability to add new websites
@@ -25,3 +19,5 @@ Login Controller :
 profile page :
 	specified sports or teams and there games and results
 
+Choose team :
+        Filter by team
