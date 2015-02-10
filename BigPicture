@@ -7,8 +7,11 @@ Job ran in background to scrape the web and parse the html for fixtures and resu
 
 Display  controller for all fixtures
 
+Data Constraints:
+	La Liga and the Premiership
+
 Scrapper Controller :
-	pick websites to scrap, maybe a list predefined to turn on or off or ability to add new websites
+	@ScrapperController.txt
 
 Schedule Controller :
 	display list of games from the data base
@@ -17,7 +20,13 @@ Login Controller :
 	Login with facebook
 
 profile page :
-	specified sports or teams and there games and results
+	specified sports or teams and their games and results
 
-Choose team :
-        Filter by team
+filters :
+        team
+	league
+	date (range)
+	sport(?)
+
+
+

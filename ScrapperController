@@ -1,0 +1,11 @@
+pick websites to scrap, maybe a list predefined to turn on or off or ability to add new websites. Need to decide where this tool/job sits in relation to rest of app; ran from within app? independently to the app DB?
+
+list :
+	takes in a list of pairs of URLs and customized scrapper classes
+	populates DB with consistent data from each scrapper class
+	
+heartbeat :
+	config for how often/when to hit websites. Whether to ignore robots.txt or not?
+
+
+
