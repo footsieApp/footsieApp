@@ -17,6 +17,7 @@ Pros:		Automated Web Interaction Gem
 		Parses and Interacts with web pages
 		Can use a wide range of options (e.g. CSS selectors) to select data
 		Good documentation
+		Uses nokogiri gem to parse
 Cons:		Possibly overly complex for footsieApp needs
 
 
