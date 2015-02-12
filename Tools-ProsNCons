@@ -1,0 +1,31 @@
+Language:	Ruby
+Pros:		Rapid dev
+		Well supported
+		Rails
+Cons:		Ramp up time
+
+
+Framework:	Rails
+Pros:		Allows for rapid dev and deployment
+Cons:		Ramp up time
+
+
+
+ScrapperGem:	Mechanize
+URL:		https://github.com/sparklemotion/mechanize
+Pros:		Automated Web Interaction Gem
+		Parses and Interacts with web pages
+		Can use a wide range of options (e.g. CSS selectors) to select data
+		Good documentation
+Cons:		Possibly overly complex for footsieApp needs
+
+
+ScrapperGem:	nokogiri
+URL:		http://www.nokogiri.org
+Pros:		Recommended
+		Can query a document using x-path
+		Parses webpages
+		Good documentation
+Cons:		Can query a document using x-path
+		no out of box web page interaction
+
