@@ -15,6 +15,3 @@
 /log/*
 !/log/.keep
 /tmp
-
-# Ignore spring so that there are no conflicts with guard
-/spring/*.pid
