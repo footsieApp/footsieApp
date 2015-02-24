@@ -29,3 +29,16 @@ Pros:		Recommended
 Cons:		Can query a document using x-path
 		no out of box web page interaction
 
+
+MOBILE APPS
+
+iOS : swift 
+         Realm for DB
+         Deserializer
+         Masonary for layout 
+
+Android : Java/android
+               Realm or active android
+               Square libraries
+               Butter knife 
+               
