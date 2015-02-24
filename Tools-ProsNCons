@@ -30,15 +30,20 @@ Cons:		Can query a document using x-path
 		no out of box web page interaction
 
 
+Things to look into : 
+	Coffeescript
+	Foundation(alternative to bootstrap)
+
+
 MOBILE APPS
 
-iOS : swift 
-         Realm for DB
-         Deserializer
-         Masonary for layout 
+iOS : 	  swift 
+      	  Realm for DB
+      	  Deserializer
+      	  Masonary for layout 
 
 Android : Java/android
-               Realm or active android
-               Square libraries
-               Butter knife 
+          Realm or active android
+          Square libraries
+          Butter knife 
                
