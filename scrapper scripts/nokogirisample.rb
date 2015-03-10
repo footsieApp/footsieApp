@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-f = File.open("//home/duinn/Woerkspace/master/footsieApp/Additional Docs/SportsPages/BBC Test Data.html")
+f = File.open("Additional Docs/SportsPages/BBC Test Data.html")
 doc = Nokogiri::HTML(f)
 
 
