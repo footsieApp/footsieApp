@@ -1,0 +1,11 @@
+Mission: LAUNCH THE KRAKEN!* (with a button on a page)
+
+*Scrapper
+
+Req:
+1. A page on the rails server with THE Button
+2. THE Button will launch the scrapper (based on existing script)
+3. Scrapper will scrape data AND populate db
+4. A page that displays "fixtures"
+
+GO GO GO!
