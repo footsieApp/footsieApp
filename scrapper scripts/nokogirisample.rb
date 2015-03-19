@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-f = File.open("Additional Docs/SportsPages/BBC Test Data.html")
+f = File.open("../Additional Docs/SportsPages/BBC Test Data.html")
 doc = Nokogiri::HTML(f)
 dateArray = doc.css('table.table-stats')#Date is contain in a super class
 dateArray.each {
