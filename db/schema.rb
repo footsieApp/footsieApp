@@ -11,11 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219213353) do
+ActiveRecord::Schema.define(version: 20150319210028) do
+
+  create_table "competitions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fixtures", force: :cascade do |t|
+    t.integer  "hometeam_id"
+    t.integer  "awayteam_id"
+    t.datetime "date"
+    t.integer  "scrapper_history_id"
+    t.integer  "competition_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scrapper_histories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

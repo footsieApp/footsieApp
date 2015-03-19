@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :fixtures
+
+  resources :scrapper_histories
+
+  resources :competitions
+
+  resources :teams
+
   get 'static_pages/home'
 
   get 'static_pages/help'

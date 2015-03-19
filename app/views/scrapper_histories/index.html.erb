@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Scrapper Histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scrapper_histories.each do |scrapper_history| %>
+      <tr>
+        <td><%= scrapper_history.name %></td>
+        <td><%= scrapper_history.url %></td>
+        <td><%= link_to 'Show', scrapper_history %></td>
+        <td><%= link_to 'Edit', edit_scrapper_history_path(scrapper_history) %></td>
+        <td><%= link_to 'Destroy', scrapper_history, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scrapper history', new_scrapper_history_path %>

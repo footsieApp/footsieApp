@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hometeam_id: 1
+  awayteam_id: 1
+  date: 2015-03-19 21:00:28
+  scrapper_history_id: 1
+  competition_id: 1
+
+two:
+  hometeam_id: 1
+  awayteam_id: 1
+  date: 2015-03-19 21:00:28
+  scrapper_history_id: 1
+  competition_id: 1
