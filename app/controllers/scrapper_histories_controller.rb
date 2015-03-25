@@ -4,19 +4,40 @@ class ScrapperHistoriesController < ApplicationController
   def scrape_local
     f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
     doc = Nokogiri::HTML(f)
+    
+    scrapperhis = ScrapperHistory.new
+    scrapperhis.name = "First Auto run"
+    scrapperhis.url = "httpmyass"
+    
+    competition = Competition.find_or_create_by(name: "FA Cup")
+#Saturday 16th May 2015 15:00
     dateArray = doc.css('table.table-stats')#Date is contain in a super class
-    dateArray.each {
-      |dateElement|
+    dateArray.each do |dateElement|
       matchArray = dateElement.css('tr.preview')#Get all the match instances for the date
-      y = 0
-      matchArray.each { 
-        |x|
-        puts dateElement.css('caption').text[38..-1] + " " + x.css('.kickoff').text.strip
-        puts 'Game: ' + y.to_s + " Home: " + x.css('.team-home a').text.strip + ' v Away: ' + x.css('.team-away a').text.strip
-        y += 1
-        }
-    }
+      split_date = dateElement.css('caption').text[38..-1].split
+      year = split_date[3].to_i
+      month = DateTime::MONTHNAMES.index(split_date[2])
+      day = split_date[1][0...-2].to_i
+      matchArray.each do |matchElement|
+        fixture = Fixture.new
+        hometeam = Team.find_or_create_by(name: matchElement.css('.team-home a').text.strip)
+        awayteam = Team.find_or_create_by(name: matchElement.css('.team-away a').text.strip)
+
+        kickoff = matchElement.css('.kickoff').text.strip
+        hour = kickoff[0...-3].to_i
+        minute = kickoff[-2..-1].to_i
+
+        fixture.date = DateTime.new(year,month,day,hour,minute,0)
+        fixture.competition_id = competition.id
+        fixture.hometeam_id = hometeam.id
+        fixture.awayteam_id = awayteam.id
+        fixture.scrapper_history_id = scrapperhis.id
+        
+        fixture.save
+      end
+    end
     f.close
+    scrapperhis.save
     redirect_to :back
   end
   # GET /scrapper_histories
