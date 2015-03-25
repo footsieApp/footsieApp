@@ -5,5 +5,20 @@
   <%= @team.name %>
 </p>
 
+<p>
+	<% unless @team.fixtures.empty? %>
+		<% @team.fixtures.each do |fixture| %>
+		<p>
+		<strong>Home:</strong>
+  		<%= fixture.hometeam.name %>
+  		<strong>Away:</strong>
+  		<%= fixture.awayteam.name %>
+  		<strong>Date:</strong>
+  		<%= fixture.date %>
+		</p>
+  		<% end %>
+  	<% end %>
+</p>
+
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
