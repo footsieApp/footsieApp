@@ -1,45 +1,8 @@
 class ScrapperHistoriesController < ApplicationController
   before_action :set_scrapper_history, only: [:show, :edit, :update, :destroy]
+  
+  require 'open-uri'
 
-  def scrape_local
-    f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
-    doc = Nokogiri::HTML(f)
-    
-    scrapperhis = ScrapperHistory.new
-    scrapperhis.name = "First Auto run"
-    scrapperhis.url = "httpmyass"
-    
-    competition = Competition.find_or_create_by(name: "FA Cup")
-#Saturday 16th May 2015 15:00
-    dateArray = doc.css('table.table-stats')#Date is contain in a super class
-    dateArray.each do |dateElement|
-      matchArray = dateElement.css('tr.preview')#Get all the match instances for the date
-      split_date = dateElement.css('caption').text[38..-1].split
-      year = split_date[3].to_i
-      month = DateTime::MONTHNAMES.index(split_date[2])
-      day = split_date[1][0...-2].to_i
-      matchArray.each do |matchElement|
-        fixture = Fixture.new
-        hometeam = Team.find_or_create_by(name: matchElement.css('.team-home a').text.strip)
-        awayteam = Team.find_or_create_by(name: matchElement.css('.team-away a').text.strip)
-
-        kickoff = matchElement.css('.kickoff').text.strip
-        hour = kickoff[0...-3].to_i
-        minute = kickoff[-2..-1].to_i
-
-        fixture.date = DateTime.new(year,month,day,hour,minute,0)
-        fixture.competition_id = competition.id
-        fixture.hometeam_id = hometeam.id
-        fixture.awayteam_id = awayteam.id
-        fixture.scrapper_history_id = scrapperhis.id
-        
-        fixture.save
-      end
-    end
-    f.close
-    scrapperhis.save
-    redirect_to :back
-  end
   # GET /scrapper_histories
   # GET /scrapper_histories.json
   def index
@@ -64,7 +27,40 @@ class ScrapperHistoriesController < ApplicationController
   # POST /scrapper_histories.json
   def create
     @scrapper_history = ScrapperHistory.new(scrapper_history_params)
+    f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
+    doc = Nokogiri::HTML(f)
+    #doc = Nokogiri::HTML(open("http://www.bbc.com/sport/football/premier-league/fixtures"))
+    #@scrapper_history = ScrapperHistory.new
 
+    
+    competition = Competition.find_or_create_by(name: scrapper_history_add_params)
+
+    dateArray = doc.css('table.table-stats')#Date is contain in a super class
+    dateArray.each do |dateElement|
+      matchArray = dateElement.css('tr.preview')#Get all the match instances for the date
+      split_date = dateElement.css('caption').text[38..-1].split
+      year = split_date[3].to_i
+      month = DateTime::MONTHNAMES.index(split_date[2])
+      day = split_date[1][0...-2].to_i
+      matchArray.each do |matchElement|
+        fixture = Fixture.new
+        hometeam = Team.find_or_create_by(name: matchElement.css('.team-home a').text.strip)
+        awayteam = Team.find_or_create_by(name: matchElement.css('.team-away a').text.strip)
+
+        kickoff = matchElement.css('.kickoff').text.strip
+        hour = kickoff[0...-3].to_i
+        minute = kickoff[-2..-1].to_i
+
+        fixture.date = DateTime.new(year,month,day,hour,minute,0)
+        fixture.competition_id = competition.id
+        fixture.hometeam_id = hometeam.id
+        fixture.awayteam_id = awayteam.id
+        fixture.scrapper_history_id = @scrapper_history.id
+
+        fixture.save
+      end
+    end
+    f.close
     respond_to do |format|
       if @scrapper_history.save
         format.html { redirect_to @scrapper_history, notice: 'Scrapper history was successfully created.' }
@@ -109,5 +105,9 @@ class ScrapperHistoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def scrapper_history_params
       params.require(:scrapper_history).permit(:name, :url)
+    end
+
+    def scrapper_history_add_params
+      params.require(:scrapper_history).permit(:competition_name)
     end
 end

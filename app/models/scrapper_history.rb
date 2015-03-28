@@ -1,3 +1,3 @@
 class ScrapperHistory < ActiveRecord::Base
-	has_many :fixture
+	has_many :fixtures
 end
