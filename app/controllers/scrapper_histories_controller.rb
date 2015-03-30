@@ -1,6 +1,5 @@
 class ScrapperHistoriesController < ApplicationController
   before_action :set_scrapper_history, only: [:show, :edit, :update, :destroy]
-  
   require 'open-uri'
 
   # GET /scrapper_histories
@@ -27,13 +26,13 @@ class ScrapperHistoriesController < ApplicationController
   # POST /scrapper_histories.json
   def create
     @scrapper_history = ScrapperHistory.new(scrapper_history_params)
+    @scrapper_history.save
     f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
     doc = Nokogiri::HTML(f)
     #doc = Nokogiri::HTML(open("http://www.bbc.com/sport/football/premier-league/fixtures"))
     #@scrapper_history = ScrapperHistory.new
 
-    
-    competition = Competition.find_or_create_by(name: scrapper_history_add_params)
+    competition = Competition.find_or_create_by(name: scrapper_history_add_params[:competition])
 
     dateArray = doc.css('table.table-stats')#Date is contain in a super class
     dateArray.each do |dateElement|
@@ -43,7 +42,7 @@ class ScrapperHistoriesController < ApplicationController
       month = DateTime::MONTHNAMES.index(split_date[2])
       day = split_date[1][0...-2].to_i
       matchArray.each do |matchElement|
-        fixture = Fixture.new
+        
         hometeam = Team.find_or_create_by(name: matchElement.css('.team-home a').text.strip)
         awayteam = Team.find_or_create_by(name: matchElement.css('.team-away a').text.strip)
 
@@ -51,10 +50,8 @@ class ScrapperHistoriesController < ApplicationController
         hour = kickoff[0...-3].to_i
         minute = kickoff[-2..-1].to_i
 
+        fixture = Fixture.find_or_create_by(hometeam_id: hometeam.id, awayteam_id: awayteam.id, competition_id: competition.id )
         fixture.date = DateTime.new(year,month,day,hour,minute,0)
-        fixture.competition_id = competition.id
-        fixture.hometeam_id = hometeam.id
-        fixture.awayteam_id = awayteam.id
         fixture.scrapper_history_id = @scrapper_history.id
 
         fixture.save
@@ -108,6 +105,6 @@ class ScrapperHistoriesController < ApplicationController
     end
 
     def scrapper_history_add_params
-      params.require(:scrapper_history).permit(:competition_name)
+      params.require(:scrapper_history).permit(:competition)
     end
 end

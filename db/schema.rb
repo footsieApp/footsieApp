@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319210028) do
+ActiveRecord::Schema.define(version: 20150330230858) do
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "scrapper_history_id"
   end
 
   create_table "fixtures", force: :cascade do |t|
@@ -39,8 +40,9 @@ ActiveRecord::Schema.define(version: 20150319210028) do
   create_table "scrapper_histories", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "competition_id"
   end
 
   create_table "teams", force: :cascade do |t|
