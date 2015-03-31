@@ -1,4 +1,4 @@
-class FixturesController < ApplicationController
+class FixturesController < ApplicationController  
 
   def index    
     
