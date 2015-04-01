@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330230858) do
+ActiveRecord::Schema.define(version: 20150401161520) do
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20150330230858) do
     t.integer  "hometeam_id"
     t.integer  "awayteam_id"
     t.datetime "date"
-    t.integer  "scrapper_history_id"
+    t.integer  "scrapper_id"
     t.integer  "competition_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20150330230858) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "scrapper_histories", force: :cascade do |t|
+  create_table "scrappers", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
     t.datetime "created_at",     null: false

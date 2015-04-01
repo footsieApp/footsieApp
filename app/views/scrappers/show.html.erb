@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @scrapper.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @scrapper.url %>
+</p>
+
+<%= link_to 'Edit', edit_scrapper_path(@scrapper) %> |
+<%= link_to 'Back', scrappers_path %>

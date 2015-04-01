@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Scrappers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scrappers.each do |scrapper| %>
+      <tr>
+        <td><%= scrapper.name %></td>
+        <td><%= scrapper.url %></td>
+        <td><%= link_to 'Show', scrapper %></td>
+        <td><%= link_to 'Edit', edit_scrapper_path(scrapper) %></td>
+        <td><%= link_to 'Destroy', scrapper, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <tr>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<!--%= button_to "LAUNCH A ROONEY!", action: scrape_local , class: "btn btn-lg btn-primary" %--> 
+
+<br>
+
+<%= link_to 'New Scrapper', new_scrapper_path %>

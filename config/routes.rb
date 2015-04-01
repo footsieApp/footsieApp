@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :fixtures
 
-  resources :scrapper_histories
+  resources :scrappers
 
   resources :competitions
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/buttonlauncher'
 
-  #get 'scrape_local' => 'scrapper_histories#scrape_local'
+  #get 'scrape_local' => 'scrappers#scrape_local'
 
   resources :microposts
 
