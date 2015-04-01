@@ -1,13 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<table>
+<content>
+<table class="span5 center-table">
   <thead>
     <tr>
       <th>Home</th>
+      <th>v</th>
       <th>Away</th>
       <th>Competition</th>
       <th>Date</th>
-      <th>Countdown</th>
+      <th>Time</th>
+      <th>till</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +19,12 @@
     <% @fixtures.each do |fixture| %>
       <tr>
         <td><%= link_to fixture.hometeam.name, fixture.hometeam %></td>
+        <td> v </td>
         <td><%= link_to fixture.awayteam.name, fixture.awayteam %></td>
         <td><%= link_to fixture.competition.name, fixture.competition %></td>
-        <td><%= fixture.date %></td>
-        <td id="due_date_timer"/>
+        <td><%= fixture.date.strftime("%a %d %b %Y") %></td>
+        <td><%= fixture.date.strftime("%H:%M") %></td>
+        <td></td>
         <td><%= link_to 'Show', fixture %></td>
         <td><%= link_to 'Edit', edit_fixture_path(fixture) %></td>
         <td><%= link_to 'Destroy', fixture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,3 +36,13 @@
 <br>
 
 <%= link_to 'New Fixture', new_fixture_path %>
+</content>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"> 
+//definition of vars used in draw function...
+
+ $(document).ready(function() {
+    alert("help!");
+  });
+
+}  
+ </script>
