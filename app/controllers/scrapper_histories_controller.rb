@@ -27,11 +27,11 @@ class ScrapperHistoriesController < ApplicationController
   def create
     @scrapper_history = ScrapperHistory.new(scrapper_history_params)
     @scrapper_history.save
-    f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
-    doc = Nokogiri::HTML(f)
-    #doc = Nokogiri::HTML(open("http://www.bbc.com/sport/football/premier-league/fixtures"))
-    #@scrapper_history = ScrapperHistory.new
-
+    # f = File.open(Dir.pwd+"/Additional Docs/SportsPages/BBC Test Data.html")
+    # f = File.open(Dir.pwd+@scrapper_history.url)
+    # doc = Nokogiri::HTML(f)
+    doc = Nokogiri::HTML(open(@scrapper_history.url))
+    
     competition = Competition.find_or_create_by(name: scrapper_history_add_params[:competition])
 
     dateArray = doc.css('table.table-stats')#Date is contain in a super class
@@ -57,7 +57,7 @@ class ScrapperHistoriesController < ApplicationController
         fixture.save
       end
     end
-    f.close
+    # f.close
     respond_to do |format|
       if @scrapper_history.save
         format.html { redirect_to @scrapper_history, notice: 'Scrapper history was successfully created.' }
@@ -87,6 +87,10 @@ class ScrapperHistoriesController < ApplicationController
   # DELETE /scrapper_histories/1.json
   def destroy
     @scrapper_history.destroy
+    if @scrapper_history.fixtures.present?
+      @scrapper_history.fixtures.destroy
+    end
+
     respond_to do |format|
       format.html { redirect_to scrapper_histories_url, notice: 'Scrapper history was successfully destroyed.' }
       format.json { head :no_content }
