@@ -1,8 +1,10 @@
 class Fixture < ActiveRecord::Base
 
-	validate :date, presence: true
-	validate :home_team, presence: true
-	validate :away_team, presence: true
+	attr_accessor :home_team, :away_team, :date
+
+	validates :date, presence: true
+	validates :home_team, presence: true
+	validates :away_team, presence: true
 	belongs_to :tournament
 
 end
