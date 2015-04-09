@@ -4,7 +4,7 @@ class FixturesController < ApplicationController
   # GET /fixtures
   # GET /fixtures.json
   def index
-    @fixtures = Fixture.all
+    @fixtures = Fixture.where("date > ?", Time.new).order("date ASC")
   end
 
   # GET /fixtures/1

@@ -24,7 +24,7 @@
         <td><%= link_to fixture.competition.name, fixture.competition %></td>
         <td><%= fixture.date.strftime("%a %d %b %Y") %></td>
         <td><%= fixture.date.strftime("%H:%M") %></td>
-        <td></td>
+        <td data-countdown="<%= fixture.date.strftime("%Y/%m/%d %H:%M:%S") %>"></td>
         <td><%= link_to 'Show', fixture %></td>
         <td><%= link_to 'Edit', edit_fixture_path(fixture) %></td>
         <td><%= link_to 'Destroy', fixture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -37,12 +37,15 @@
 
 <%= link_to 'New Fixture', new_fixture_path %>
 </content>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"> 
-//definition of vars used in draw function...
-
- $(document).ready(function() {
-    alert("help!");
-  });
-
-}  
- </script>
+<script type="text/javascript">
+$('[data-countdown]').each(function() {
+  var $this = $(this), finalDate = $(this).data('countdown');
+  $this.countdown(finalDate, function(event) {
+    var format = '%H:%M:%S';
+    if(event.offset.totalDays > 0) {
+      format = '%H hours %D days';
+    }
+    $this.html(event.strftime(format));
+   });
+});
+</script>
