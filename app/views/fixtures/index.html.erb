@@ -17,6 +17,7 @@
 
   <tbody>
     <% @fixtures.each do |fixture| %>
+      <% if fixture.present? %>
       <tr>
         <td><%= link_to fixture.hometeam.name, fixture.hometeam %></td>
         <td> v </td>
@@ -29,6 +30,7 @@
         <td><%= link_to 'Edit', edit_fixture_path(fixture) %></td>
         <td><%= link_to 'Destroy', fixture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
